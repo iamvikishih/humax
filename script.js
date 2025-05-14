@@ -57,23 +57,15 @@ document.addEventListener('DOMContentLoaded', function () {
   animateOnScroll('.featured-article, .secondary-articles', 'visible');
   document.querySelectorAll('.featured-article, .secondary-articles').forEach(el => el.classList.add('fade-in-up'));
 
-  // 3. brand-logos 由兩側向中間淡入集中
+  // 3. brand-logos 由下往上淡入
   animateOnScroll('.brand-item', 'visible');
   const brandItems = document.querySelectorAll('.brand-item');
-  const mid = (brandItems.length - 1) / 2;
   brandItems.forEach((el, i) => {
-    el.classList.add('fade-in-center');
-    // 小螢幕時不做 translateX 動畫，避免 logo 消失
-    if (window.innerWidth > 640) {
-      const offset = (i - mid) * 80; // 80px 可調整
-      el.style.transform = `translateX(${offset}px) scale(0.95)`;
-      el.style.transitionDelay = (Math.abs(i - mid) * 0.1) + 's';
-      el.dataset.offset = offset;
-    } else {
-      el.style.transform = '';
-      el.style.transitionDelay = '';
-      el.dataset.offset = '';
-    }
+    el.classList.add('fade-in-up');
+    // 不再做 translateX 動畫
+    el.style.transform = '';
+    el.style.transitionDelay = '';
+    el.dataset.offset = '';
   });
 
   // 4. philosophy-section 由下往上淡入
